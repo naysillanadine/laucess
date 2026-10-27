@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Launcess</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="/assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="admin-body">
+  <!-- LOGIN VIEW -->
+  <div id="login-view" class="admin-wrap" style="max-width:400px;margin:80px auto;padding:40px;background:#fff;border-radius:20px;border:1px solid var(--line);">
+    <h1 style="font-family:'Playfair Display';font-size:28px;margin-bottom:8px;">Admin Launcess</h1>
+    <p style="color:var(--muted);margin-bottom:24px;">Masukkan password untuk mengakses dashboard.</p>
+    <input type="password" id="admin-pass" placeholder="Password" style="width:100%;padding:14px;border:1px solid var(--line);border-radius:12px;font-size:15px;margin-bottom:16px;">
+    <button id="login-btn" class="btn primary" style="width:100%;">Masuk</button>
+    <p id="login-error" class="error" hidden style="color:var(--red);margin-top:12px;font-size:14px;"></p>
+  </div>
+
+  <!-- DASHBOARD VIEW -->
+  <div id="dashboard-view" hidden>
+    <header class="admin-header">
+      <div class="brand">
+        <span class="brand-mark">L</span>
+        Launcess Admin
+      </div>
+      <button id="logout-btn" class="btn ghost btn-sm">Keluar</button>
+    </header>
+
+    <div class="admin-wrap">
+      <div id="stats" class="admin-stats"></div>
+
+      <div class="admin-toolbar">
+        <h2>Daftar Order</h2>
+        <div class="filter-group">
+          <select id="filter-status">
+            <option value="">Semua Status</option>
+            <option value="Pending">Pending</option>
+            <option value="Diterima">Diterima</option>
+            <option value="Dicuci">Dicuci</option>
+            <option value="Siap">Siap</option>
+            <option value="Selesai">Selesai</option>
+            <option value="Batal">Batal</option>
+          </select>
+          <input type="text" id="search-order" placeholder="Cari order / nama / WA...">
+          <button id="refresh-btn" class="btn ghost btn-sm">Refresh</button>
+        </div>
+      </div>
+
+      <div class="orders-table-wrap">
+        <table class="orders">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Waktu</th>
+              <th>Nama</th>
+              <th>WhatsApp</th>
+              <th>Layanan</th>
+              <th>Status</th>
+              <th>Harga</th>
+              <th>Catatan</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="orders-body">
+            <tr><td colspan="9" class="admin-empty">Memuat data...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDIT MODAL -->
+  <div id="edit-modal" hidden style="position:fixed;inset:0;background:rgba(0,0,0,.4);display:flex;align-items:center;justify-content:center;z-index:200;">
+    <div style="background:#fff;border-radius:20px;padding:32px;width:90%;max-width:420px;border:1px solid var(--line);">
+      <h3 id="modal-title" style="font-family:'Playfair Display';margin-bottom:20px;">Edit Order</h3>
+      <input type="hidden" id="edit-oid">
+      <div class="form-group" style="margin-bottom:14px;">
+        <label>Status</label>
+        <select id="edit-status" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;">
+          <option value="Pending">Pending</option>
+          <option value="Diterima">Diterima</option>
+          <option value="Dicuci">Dicuci</option>
+          <option value="Siap">Siap</option>
+          <option value="Selesai">Selesai</option>
+          <option value="Batal">Batal</option>
+        </select>
+      </div>
+      <div class="form-group" style="margin-bottom:14px;">
+        <label>Harga Final (Rp)</label>
+        <input type="number" id="edit-harga" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;">
+      </div>
+      <div class="form-group" style="margin-bottom:20px;">
+        <label>Catatan Admin</label>
+        <textarea id="edit-catatan" rows="3" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;"></textarea>
+      </div>
+      <div style="display:flex;gap:10px;">
+        <button id="save-edit" class="btn primary" style="flex:1;">Simpan</button>
+        <button id="close-modal" class="btn ghost" style="flex:1;">Batal</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/config.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# robots.txt for https://nadin.web.id/
+User-agent: *
+Allow: /
+
+# Disallow admin area
+Disallow: /admin.html
+Disallow: /js/
+Disallow: /apps-script/
+
+Sitemap: https://nadin.web.id/sitemap.xml
